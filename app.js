@@ -36,18 +36,34 @@ const banana = new Fruit({
     review: "Wierd"
 });
 
-// Fruit.insertMany([kiwi,orange,banana]).then (function (err) {
-//     if (err)
-//         console.log(err);
-//     else
-//         console.log("Success");    
+// // // Fruit.insertMany([kiwi,orange,banana]).then (function (err) {
+// // //     if (err)
+// // //         console.log(err);
+// // //     else
+// // //         console.log("Success");    
+// // // });
+
+// Fruit.insertMany([kiwi, orange, banana]).then(function () {
+//     console.log("Successfully saved all the fruits to fruitsDB.");
+// }).catch(function (err) {
+//     console.log(err);
 // });
 
-Fruit.insertMany([kiwi, orange, banana]).then(function () {
-    console.log("Successfully saved all the fruits to fruitsDB.");
-}).catch(function (err) {
-    console.log(err);
-});
+async function findFruits() {
+    try {
+        const fruits = await Fruit.find();
+        console.log(fruits);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+findFruits();
+
+
+
+
+
 
 
 
