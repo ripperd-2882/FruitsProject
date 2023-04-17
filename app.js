@@ -52,10 +52,14 @@ const banana = new Fruit({
 async function findFruits() {
     try {
         const fruits = await Fruit.find();
-        console.log(fruits);
+        fruits.forEach(function (fruitItem) {
+            console.log(fruitItem.name);
+        })
+        // console.log(fruits);
     } catch (err) {
         console.log(err);
     }
+    mongoose.connection.close();
 }
 
 findFruits();
