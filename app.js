@@ -4,13 +4,13 @@ mongoose.connect("mongodb://127.0.0.1:27017/fruitsDB");
 
 const fruitSchema = new mongoose.Schema({
     name: {
-        type:String,
-        required:true
+        type: String,
+        required: true
     },
     rating: {
-        type:Number,
-        min:1,
-        max:10
+        type: Number,
+        min: 1,
+        max: 10
     },
     review: String
 });
@@ -19,11 +19,42 @@ const Fruit = mongoose.model("Fruit", fruitSchema);
 
 const fruit = new Fruit({
     // name: "Apple",
-    rating: 27,
+    rating: 10,
     review: "Good"
 });
 
-fruit.save();
+// fruit.save();
+
+
+
+async function updateFruits() {
+    try {
+        const fruits = await Fruit.updateOne({ _id: '643e48ed5e10758897a40e2b' }, { name: 'Peach' });
+        console.log("Successfully Updated");
+    } catch (err) {
+        console.log(err);
+    }
+    mongoose.connection.close();
+}
+
+// updateFruits();
+
+
+async function deleteFruits() {
+    try {
+        const fruits = await Fruit.deleteOne({ name: 'Peach' });
+        console.log("Successfully Deleted");
+    } catch (err) {
+        console.log(err);
+    }
+    mongoose.connection.close();
+}
+
+// deleteFruits();
+
+
+
+
 
 // const kiwi = new Fruit({
 //     name: "Kiwi",
@@ -89,7 +120,7 @@ async function findFruits() {
     mongoose.connection.close();
 }
 
-findFruits();
+// findFruits();
 
 
 
@@ -112,4 +143,18 @@ const person = new Person({
     age: 37
 });
 
-// person.save();
+person.save();
+
+
+
+async function deletePerson() {
+    try {
+        const people = await Person.deleteMany({ name: 'John' });
+        console.log("Successfully Deleted");
+    } catch (err) {
+        console.log(err);
+    }
+    mongoose.connection.close();
+}
+
+// deletePerson();
